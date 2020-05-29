@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "美团外卖",
+  "usingComponents": {
+    "location": "/pages/index/components/location",
+    "search": "/pages/index/components/search",
+    "title": "/pages/index/components/title",
+    "recommend": "/pages/index/components/recommend",
+    "lb": "/pages/index/components/lb"
+  }
+}

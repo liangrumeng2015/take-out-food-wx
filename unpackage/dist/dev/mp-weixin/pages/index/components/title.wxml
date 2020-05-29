@@ -1,0 +1,1 @@
+<block wx:if="{{title}}"><view class="title data-v-c0a3786a">{{title}}</view></block>

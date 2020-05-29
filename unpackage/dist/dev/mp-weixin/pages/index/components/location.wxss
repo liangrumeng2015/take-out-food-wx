@@ -1,0 +1,15 @@
+
+.location.data-v-1b366312{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.location image.data-v-1b366312{
+  width: 40rpx;
+  height: 40rpx;
+}
+.location_place.data-v-1b366312{
+  padding:0 15rpx;
+  font-weight: bold;
+}
+
