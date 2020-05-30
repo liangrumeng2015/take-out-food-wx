@@ -104,11 +104,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"pages/index/components/lb":1,"pages/index/components/location":1,"pages/index/components/recommend":1,"pages/index/components/search":1,"pages/index/components/title":1};
+/******/ 		var cssChunks = {"pages/index/components/lb":1,"pages/index/components/location":1,"pages/index/components/nearByShop":1,"pages/index/components/recommend":1,"pages/index/components/search":1,"pages/index/components/title":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"pages/index/components/lb":"pages/index/components/lb","pages/index/components/location":"pages/index/components/location","pages/index/components/recommend":"pages/index/components/recommend","pages/index/components/search":"pages/index/components/search","pages/index/components/title":"pages/index/components/title"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"pages/index/components/lb":"pages/index/components/lb","pages/index/components/location":"pages/index/components/location","pages/index/components/nearByShop":"pages/index/components/nearByShop","pages/index/components/recommend":"pages/index/components/recommend","pages/index/components/search":"pages/index/components/search","pages/index/components/title":"pages/index/components/title"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

@@ -1,6 +1,6 @@
-(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],{
-
-/***/ 1:
+(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],[
+/* 0 */,
+/* 1 */
 /*!************************************************************!*\
   !*** ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js ***!
   \************************************************************/
@@ -1550,129 +1550,7 @@ var uni$1 = uni;var _default =
 uni$1;exports.default = _default;
 
 /***/ }),
-
-/***/ 14:
-/*!**********************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
-  \**********************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent (
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier, /* server only */
-  shadowMode, /* vue-cli only */
-  components, // fixed by xxxxxx auto components
-  renderjs // fixed by xxxxxx renderjs
-) {
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // fixed by xxxxxx auto components
-  if (components) {
-    options.components = Object.assign(components, options.components || {})
-  }
-  // fixed by xxxxxx renderjs
-  if (renderjs) {
-    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
-      this[renderjs.__module] = this
-    });
-    (options.mixins || (options.mixins = [])).push(renderjs)
-  }
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-
-/***/ 2:
+/* 2 */
 /*!******************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js ***!
   \******************************************************************************************/
@@ -7702,102 +7580,7 @@ internalMixin(Vue);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 3)))
 
 /***/ }),
-
-/***/ 21:
-/*!***********************************************************************************!*\
-  !*** /Users/liangrumeng/Documents/HBuilderProjects/wx-meituan/config/constant.js ***!
-  \***********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.lbData = void 0;var lbData = [
-[
-{
-  'img': '../../../static/inster/meishi.png',
-  'title': '美食' },
-
-{
-  'img': '../../../static/inster/chaoshi.png',
-  'title': '超市便利' },
-
-{
-  'img': '../../../static/inster/shuiguo.png',
-  'title': '蔬菜水果' },
-
-{
-  'img': '../../../static/inster/meituan.png',
-  'title': '美团专送' },
-
-{
-  'img': '../../../static/inster/paotui.png',
-  'title': '跑腿代购' },
-
-{
-  'img': '../../../static/inster/yexiao.png',
-  'title': '夜宵' },
-
-{
-  'img': '../../../static/inster/jintie.png',
-  'title': '津贴联盟' },
-
-{
-  'img': '../../../static/inster/pinping.png',
-  'title': '甜点饮品' },
-
-{
-  'img': '../../../static/inster/shaokao.png',
-  'title': '龙虾烧烤' },
-
-{
-  'img': '../../../static/inster/dangao.png',
-  'title': '甜蜜蛋糕' }],
-
-
-[
-{
-  'img': '../../../static/inster/hanbao.png',
-  'title': '汉堡披萨' },
-
-{
-  'img': '../../../static/inster/liaoli.png',
-  'title': '日韩料理' },
-
-{
-  'img': '../../../static/inster/malatang.png',
-  'title': '麻辣烫' },
-
-{
-  'img': '../../../static/inster/kuaican.png',
-  'title': '快食简餐' },
-
-{
-  'img': '../../../static/inster/xianhua.png',
-  'title': '浪漫鲜花' },
-
-{
-  'img': '../../../static/inster/lazi.png',
-  'title': '无辣不欢' },
-
-{
-  'img': '../../../static/inster/jiaozi.png',
-  'title': '饺子馆' },
-
-{
-  'img': '../../../static/inster/xiaochi.png',
-  'title': '小吃馆' },
-
-{
-  'img': '../../../static/inster/baofan.png',
-  'title': '煲仔饭' },
-
-{
-  'img': '../../../static/inster/qita.png',
-  'title': '其他' }]];exports.lbData = lbData;
-
-/***/ }),
-
-/***/ 3:
+/* 3 */
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
   \***********************************/
@@ -7827,8 +7610,7 @@ module.exports = g;
 
 
 /***/ }),
-
-/***/ 4:
+/* 4 */
 /*!***************************************************************************!*\
   !*** /Users/liangrumeng/Documents/HBuilderProjects/wx-meituan/pages.json ***!
   \***************************************************************************/
@@ -7839,8 +7621,7 @@ module.exports = g;
 
 
 /***/ }),
-
-/***/ 5:
+/* 5 */
 /*!*******************************************************!*\
   !*** ./node_modules/@dcloudio/uni-stat/dist/index.js ***!
   \*******************************************************/
@@ -8726,8 +8507,7 @@ main();
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-
-/***/ 6:
+/* 6 */
 /*!******************************************************!*\
   !*** ./node_modules/@dcloudio/uni-stat/package.json ***!
   \******************************************************/
@@ -8737,8 +8517,7 @@ main();
 module.exports = {"_from":"@dcloudio/uni-stat@alpha","_id":"@dcloudio/uni-stat@2.0.0-alpha-25720200116005","_inBundle":false,"_integrity":"sha512-RZFw3WAaS/CZTzzv9JPaWvmoNitojD/06vPdHSzlqZi8GbuE222lFuyochEjrGkG8rPPrWHAnwfoPBuQVtkfdg==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@alpha","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"alpha","saveSpec":null,"fetchSpec":"alpha"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-alpha-25720200116005.tgz","_shasum":"08bb17aba91c84a981f33d74153aa3dd07b578ad","_spec":"@dcloudio/uni-stat@alpha","_where":"/Users/guoshengqiang/Documents/dcloud-plugins/alpha/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"a129bde60de35f7ef497f43d5a45b4556231995c","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-alpha-25720200116005"};
 
 /***/ }),
-
-/***/ 7:
+/* 7 */
 /*!********************************************************************************************!*\
   !*** /Users/liangrumeng/Documents/HBuilderProjects/wx-meituan/pages.json?{"type":"style"} ***!
   \********************************************************************************************/
@@ -8746,11 +8525,245 @@ module.exports = {"_from":"@dcloudio/uni-stat@alpha","_id":"@dcloudio/uni-stat@2
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "美团外卖", "usingComponents": { "location": "/pages/index/components/location", "search": "/pages/index/components/search", "title": "/pages/index/components/title", "recommend": "/pages/index/components/recommend", "lb": "/pages/index/components/lb" }, "usingAutoImportComponents": {} }, "pages/order/order": { "navigationBarTitleText": "订单", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/my/my": { "navigationBarTitleText": "我的", "usingComponents": {}, "usingAutoImportComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "美团外卖", "navigationBarBackgroundColor": "#FFFFFF", "backgroundColor": "#FFFFFF" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "美团外卖" }, "pages/order/order": { "navigationBarTitleText": "订单" }, "pages/my/my": { "navigationBarTitleText": "我的" } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "美团外卖", "navigationBarBackgroundColor": "#FFFFFF", "backgroundColor": "#FFFFFF" } };exports.default = _default;
 
 /***/ }),
+/* 8 */
+/*!*******************************************************************************************!*\
+  !*** /Users/liangrumeng/Documents/HBuilderProjects/wx-meituan/pages.json?{"type":"stat"} ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-/***/ 78:
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "appid": "__UNI__8BD63EC" };exports.default = _default;
+
+/***/ }),
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */
+/*!**********************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
+  \**********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode, /* vue-cli only */
+  components, // fixed by xxxxxx auto components
+  renderjs // fixed by xxxxxx renderjs
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // fixed by xxxxxx auto components
+  if (components) {
+    options.components = Object.assign(components, options.components || {})
+  }
+  // fixed by xxxxxx renderjs
+  if (renderjs) {
+    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
+      this[renderjs.__module] = this
+    });
+    (options.mixins || (options.mixins = [])).push(renderjs)
+  }
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */
+/*!***********************************************************************************!*\
+  !*** /Users/liangrumeng/Documents/HBuilderProjects/wx-meituan/config/constant.js ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.lbData = void 0;var lbData = [
+[
+{
+  'img': '../../../static/inster/meishi.png',
+  'title': '美食' },
+
+{
+  'img': '../../../static/inster/chaoshi.png',
+  'title': '超市便利' },
+
+{
+  'img': '../../../static/inster/shuiguo.png',
+  'title': '蔬菜水果' },
+
+{
+  'img': '../../../static/inster/meituan.png',
+  'title': '美团专送' },
+
+{
+  'img': '../../../static/inster/paotui.png',
+  'title': '跑腿代购' },
+
+{
+  'img': '../../../static/inster/yexiao.png',
+  'title': '夜宵' },
+
+{
+  'img': '../../../static/inster/jintie.png',
+  'title': '津贴联盟' },
+
+{
+  'img': '../../../static/inster/pinping.png',
+  'title': '甜点饮品' },
+
+{
+  'img': '../../../static/inster/shaokao.png',
+  'title': '龙虾烧烤' },
+
+{
+  'img': '../../../static/inster/dangao.png',
+  'title': '甜蜜蛋糕' }],
+
+
+[
+{
+  'img': '../../../static/inster/hanbao.png',
+  'title': '汉堡披萨' },
+
+{
+  'img': '../../../static/inster/liaoli.png',
+  'title': '日韩料理' },
+
+{
+  'img': '../../../static/inster/malatang.png',
+  'title': '麻辣烫' },
+
+{
+  'img': '../../../static/inster/kuaican.png',
+  'title': '快食简餐' },
+
+{
+  'img': '../../../static/inster/xianhua.png',
+  'title': '浪漫鲜花' },
+
+{
+  'img': '../../../static/inster/lazi.png',
+  'title': '无辣不欢' },
+
+{
+  'img': '../../../static/inster/jiaozi.png',
+  'title': '饺子馆' },
+
+{
+  'img': '../../../static/inster/xiaochi.png',
+  'title': '小吃馆' },
+
+{
+  'img': '../../../static/inster/baofan.png',
+  'title': '煲仔饭' },
+
+{
+  'img': '../../../static/inster/qita.png',
+  'title': '其他' }]];exports.lbData = lbData;
+
+/***/ }),
+/* 22 */
 /*!**********************************************************************************!*\
   !*** /Users/liangrumeng/Documents/HBuilderProjects/wx-meituan/config/request.js ***!
   \**********************************************************************************/
@@ -8791,8 +8804,7 @@ exports.request = request;var catchToast = function catchToast(title) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-
-/***/ 79:
+/* 23 */
 /*!******************************************************************************!*\
   !*** /Users/liangrumeng/Documents/HBuilderProjects/wx-meituan/config/api.js ***!
   \******************************************************************************/
@@ -8800,25 +8812,15 @@ exports.request = request;var catchToast = function catchToast(title) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.searchApi = exports.recommendApi = void 0; // 为你优选  get
+Object.defineProperty(exports, "__esModule", { value: true });exports.searchApi = exports.nearbyShopApi = exports.recommendApi = void 0; // 为你优选  get
 var recommendApi = '/forshop/getprefer';
 
+// 附近商家
+exports.recommendApi = recommendApi;var nearbyShopApi = '/forshop/wxshop';
+
 // 搜索  post
-exports.recommendApi = recommendApi;var searchApi = '/forshop/search';exports.searchApi = searchApi;
-
-/***/ }),
-
-/***/ 8:
-/*!*******************************************************************************************!*\
-  !*** /Users/liangrumeng/Documents/HBuilderProjects/wx-meituan/pages.json?{"type":"stat"} ***!
-  \*******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "appid": "__UNI__8BD63EC" };exports.default = _default;
+exports.nearbyShopApi = nearbyShopApi;var searchApi = '/forshop/search';exports.searchApi = searchApi;
 
 /***/ })
-
-}]);
+]]);
 //# sourceMappingURL=../../.sourcemap/mp-weixin/common/vendor.js.map

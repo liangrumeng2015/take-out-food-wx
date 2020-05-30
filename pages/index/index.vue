@@ -15,8 +15,9 @@
     <Recommend :recommendArr="recommendArr" />
     
     <!-- title -->
-    <Title title="附近商家" />
-    
+    <Title title="附近商家" bb="bbbbbbbbb" />
+    <!-- 附近商家 -->
+    <NearByShop :nearByArr="nearByArr" aa='5555' />
     
 	</view>
 </template>
@@ -27,16 +28,19 @@
   import Title from './components/title.vue'
   import Recommend from './components/recommend.vue'
   import Lb from './components/lb.vue'
+  import NearByShop from './components/nearByShop.vue'
   import {lbData} from '../../config/constant.js'   // 轮播的数据
+  
   import {request} from '../../config/request.js'
-  import {recommendApi,searchApi} from '../../config/api.js'
+  import {recommendApi,nearbyShopApi,searchApi} from '../../config/api.js'
 	export default {
     components:{
       Location,
       Search,
       Title,
       Recommend,
-      Lb
+      Lb,
+      NearByShop
     },
 		data() {
 			return {
@@ -44,18 +48,25 @@
 				title: 'Hello',
         location:'北京啊',
         searchVal:'麻辣烫',
-        recommendArr:[]   // 推荐的商品
+        recommendArr:[],   // 推荐的商品
+        nearByArr:[]  // 附近商家的商品
 			}
 		},
 		mounted(){
-       this.getRecommendData()  
+       this.getRecommendData() 
+       this.getNearByShopData()
     },
 		methods: {
       // 为你优选
       getRecommendData(){
         request(recommendApi,'','get').then(res=>{
-          console.log(res)
           this.recommendArr = res
+        })
+      },
+      // 附近商家
+      getNearByShopData(){
+        request(nearbyShopApi,'','get').then(res=>{
+          this.nearByArr = res
         })
       }
 		}

@@ -5,6 +5,7 @@
     "search": "/pages/index/components/search",
     "title": "/pages/index/components/title",
     "recommend": "/pages/index/components/recommend",
-    "lb": "/pages/index/components/lb"
+    "lb": "/pages/index/components/lb",
+    "near-by-shop": "/pages/index/components/nearByShop"
   }
 }
