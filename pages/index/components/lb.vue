@@ -24,12 +24,10 @@
 </template>
 
 <script>
-  import {lbData} from '../../../static/config/constant.js'
   export default{
     data(){
       return{
         msg:'',
-        lbData,   // lb数据
         option:{   // swiper的相关配置
           interval:4000,
           duration:400,
@@ -38,6 +36,9 @@
         currentIdx:0,   // 当前的索引
         indicatorArr:[]   // 面板指示的个数
       }
+    },
+    props:{
+      lbData:Array
     },
     mounted(){
       for(let i = 0;i<this.lbData.length;i++){

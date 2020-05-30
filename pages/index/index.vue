@@ -7,13 +7,12 @@
     <Search :searchVal="searchVal" />
     
     <!-- 轮播 -->
-    <Lb />
+    <Lb :lbData="lbData" />
     
     <!-- title -->
     <Title title="为你优选" />
-    
-    <!-- 推荐  横向滚动的-->
-    <Recommend />
+    <!-- 商品推荐  横向滚动的-->
+    <Recommend :recommendArr="recommendArr" />
     
     <!-- title -->
     <Title title="附近商家" />
@@ -28,6 +27,9 @@
   import Title from './components/title.vue'
   import Recommend from './components/recommend.vue'
   import Lb from './components/lb.vue'
+  import {lbData} from '../../config/constant.js'   // 轮播的数据
+  import {request} from '../../config/request.js'
+  import {recommendApi,searchApi} from '../../config/api.js'
 	export default {
     components:{
       Location,
@@ -38,16 +40,24 @@
     },
 		data() {
 			return {
+        lbData,
 				title: 'Hello',
         location:'北京啊',
-        searchVal:'麻辣烫'
+        searchVal:'麻辣烫',
+        recommendArr:[]   // 推荐的商品
 			}
 		},
-		onLoad() {
-
-		},
+		mounted(){
+       this.getRecommendData()  
+    },
 		methods: {
-
+      // 为你优选
+      getRecommendData(){
+        request(recommendApi,'','get').then(res=>{
+          console.log(res)
+          this.recommendArr = res
+        })
+      }
 		}
 	}
 </script>

@@ -7703,6 +7703,100 @@ internalMixin(Vue);
 
 /***/ }),
 
+/***/ 21:
+/*!***********************************************************************************!*\
+  !*** /Users/liangrumeng/Documents/HBuilderProjects/wx-meituan/config/constant.js ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.lbData = void 0;var lbData = [
+[
+{
+  'img': '../../../static/inster/meishi.png',
+  'title': '美食' },
+
+{
+  'img': '../../../static/inster/chaoshi.png',
+  'title': '超市便利' },
+
+{
+  'img': '../../../static/inster/shuiguo.png',
+  'title': '蔬菜水果' },
+
+{
+  'img': '../../../static/inster/meituan.png',
+  'title': '美团专送' },
+
+{
+  'img': '../../../static/inster/paotui.png',
+  'title': '跑腿代购' },
+
+{
+  'img': '../../../static/inster/yexiao.png',
+  'title': '夜宵' },
+
+{
+  'img': '../../../static/inster/jintie.png',
+  'title': '津贴联盟' },
+
+{
+  'img': '../../../static/inster/pinping.png',
+  'title': '甜点饮品' },
+
+{
+  'img': '../../../static/inster/shaokao.png',
+  'title': '龙虾烧烤' },
+
+{
+  'img': '../../../static/inster/dangao.png',
+  'title': '甜蜜蛋糕' }],
+
+
+[
+{
+  'img': '../../../static/inster/hanbao.png',
+  'title': '汉堡披萨' },
+
+{
+  'img': '../../../static/inster/liaoli.png',
+  'title': '日韩料理' },
+
+{
+  'img': '../../../static/inster/malatang.png',
+  'title': '麻辣烫' },
+
+{
+  'img': '../../../static/inster/kuaican.png',
+  'title': '快食简餐' },
+
+{
+  'img': '../../../static/inster/xianhua.png',
+  'title': '浪漫鲜花' },
+
+{
+  'img': '../../../static/inster/lazi.png',
+  'title': '无辣不欢' },
+
+{
+  'img': '../../../static/inster/jiaozi.png',
+  'title': '饺子馆' },
+
+{
+  'img': '../../../static/inster/xiaochi.png',
+  'title': '小吃馆' },
+
+{
+  'img': '../../../static/inster/baofan.png',
+  'title': '煲仔饭' },
+
+{
+  'img': '../../../static/inster/qita.png',
+  'title': '其他' }]];exports.lbData = lbData;
+
+/***/ }),
+
 /***/ 3:
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -8652,101 +8746,65 @@ module.exports = {"_from":"@dcloudio/uni-stat@alpha","_id":"@dcloudio/uni-stat@2
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "美团外卖", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/order/order": { "navigationBarTitleText": "订单", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/my/my": { "navigationBarTitleText": "我的", "usingComponents": {}, "usingAutoImportComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "美团外卖", "navigationBarBackgroundColor": "#FFFFFF", "backgroundColor": "#FFFFFF" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "美团外卖", "usingComponents": { "location": "/pages/index/components/location", "search": "/pages/index/components/search", "title": "/pages/index/components/title", "recommend": "/pages/index/components/recommend", "lb": "/pages/index/components/lb" }, "usingAutoImportComponents": {} }, "pages/order/order": { "navigationBarTitleText": "订单", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/my/my": { "navigationBarTitleText": "我的", "usingComponents": {}, "usingAutoImportComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "美团外卖", "navigationBarBackgroundColor": "#FFFFFF", "backgroundColor": "#FFFFFF" } };exports.default = _default;
 
 /***/ }),
 
-/***/ 74:
-/*!******************************************************************************************!*\
-  !*** /Users/liangrumeng/Documents/HBuilderProjects/wx-meituan/static/config/constant.js ***!
-  \******************************************************************************************/
+/***/ 78:
+/*!**********************************************************************************!*\
+  !*** /Users/liangrumeng/Documents/HBuilderProjects/wx-meituan/config/request.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.lbData = void 0;var lbData = [
-[
-{
-  'img': '../../../static/inster/meishi.png',
-  'title': '美食' },
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.request = void 0; // 公用接口
+var httpURI = 'http://meituan.thexxdd.cn/api';
 
-{
-  'img': '../../../static/inster/chaoshi.png',
-  'title': '超市便利' },
+// 封装的网络请求
+var request = function request(url) {var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};var method = arguments.length > 2 ? arguments[2] : undefined;
+  return new Promise(function (resolve, reject) {
+    uni.request({
+      url: httpURI + url,
+      data: data,
+      method: method,
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' } }).
 
-{
-  'img': '../../../static/inster/shuiguo.png',
-  'title': '蔬菜水果' },
+    then(function (res) {
+      resolve(res[1].data);
+    }).catch(function (err) {
+      var error = '服务器错误，请稍后再试';
+      catchToast(error);
+      reject(err);
+    });
+  });
+};
 
-{
-  'img': '../../../static/inster/meituan.png',
-  'title': '美团专送' },
+// catch里面的提示
+exports.request = request;var catchToast = function catchToast(title) {
+  uni.showToast({
+    title: title,
+    icon: 'none' });
 
-{
-  'img': '../../../static/inster/paotui.png',
-  'title': '跑腿代购' },
+};
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
-{
-  'img': '../../../static/inster/yexiao.png',
-  'title': '夜宵' },
+/***/ }),
 
-{
-  'img': '../../../static/inster/jintie.png',
-  'title': '津贴联盟' },
+/***/ 79:
+/*!******************************************************************************!*\
+  !*** /Users/liangrumeng/Documents/HBuilderProjects/wx-meituan/config/api.js ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-{
-  'img': '../../../static/inster/pinping.png',
-  'title': '甜点饮品' },
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.searchApi = exports.recommendApi = void 0; // 为你优选  get
+var recommendApi = '/forshop/getprefer';
 
-{
-  'img': '../../../static/inster/shaokao.png',
-  'title': '龙虾烧烤' },
-
-{
-  'img': '../../../static/inster/dangao.png',
-  'title': '甜蜜蛋糕' }],
-
-
-[
-{
-  'img': '../../../static/inster/hanbao.png',
-  'title': '汉堡披萨' },
-
-{
-  'img': '../../../static/inster/liaoli.png',
-  'title': '日韩料理' },
-
-{
-  'img': '../../../static/inster/malatang.png',
-  'title': '麻辣烫' },
-
-{
-  'img': '../../../static/inster/kuaican.png',
-  'title': '快食简餐' },
-
-{
-  'img': '../../../static/inster/xianhua.png',
-  'title': '浪漫鲜花' },
-
-{
-  'img': '../../../static/inster/lazi.png',
-  'title': '无辣不欢' },
-
-{
-  'img': '../../../static/inster/jiaozi.png',
-  'title': '饺子馆' },
-
-{
-  'img': '../../../static/inster/xiaochi.png',
-  'title': '小吃馆' },
-
-{
-  'img': '../../../static/inster/baofan.png',
-  'title': '煲仔饭' },
-
-{
-  'img': '../../../static/inster/qita.png',
-  'title': '其他' }]];exports.lbData = lbData;
+// 搜索  post
+exports.recommendApi = recommendApi;var searchApi = '/forshop/search';exports.searchApi = searchApi;
 
 /***/ }),
 
