@@ -1,6 +1,4 @@
 <template>
-  <view>
-    <view></view>
     <view>
       <view class="shop_view" v-for="(item,idx) in nearByArr" :key="idx">
         <view class="shop_left_logo">
@@ -38,7 +36,6 @@
         </view>
       </view>
     </view>
-  </view>
 </template>
 
 <script>
@@ -50,11 +47,12 @@
     },
     props:{
       nearByArr:Array
-    }
+    },
   }
 </script>
 
 <style scoped>
+  
   .shop_view{
     background-color: #f5f5f5;
     border-radius: 10rpx;

@@ -142,7 +142,10 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
 
 
 
@@ -176,7 +179,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var _constant = __webpack_require__(/*! ../../config/constant.js */ 21);
 
 var _request = __webpack_require__(/*! ../../config/request.js */ 22);
-var _api = __webpack_require__(/*! ../../config/api.js */ 23);var Location = function Location() {return __webpack_require__.e(/*! import() | pages/index/components/location */ "pages/index/components/location").then(__webpack_require__.bind(null, /*! ./components/location.vue */ 38));};var Search = function Search() {return __webpack_require__.e(/*! import() | pages/index/components/search */ "pages/index/components/search").then(__webpack_require__.bind(null, /*! ./components/search.vue */ 45));};var Title = function Title() {return __webpack_require__.e(/*! import() | pages/index/components/title */ "pages/index/components/title").then(__webpack_require__.bind(null, /*! ./components/title.vue */ 52));};var Recommend = function Recommend() {return __webpack_require__.e(/*! import() | pages/index/components/recommend */ "pages/index/components/recommend").then(__webpack_require__.bind(null, /*! ./components/recommend.vue */ 59));};var Lb = function Lb() {return __webpack_require__.e(/*! import() | pages/index/components/lb */ "pages/index/components/lb").then(__webpack_require__.bind(null, /*! ./components/lb.vue */ 66));};var NearByShop = function NearByShop() {return __webpack_require__.e(/*! import() | pages/index/components/nearByShop */ "pages/index/components/nearByShop").then(__webpack_require__.bind(null, /*! ./components/nearByShop.vue */ 73));};var _default =
+var _api = __webpack_require__(/*! ../../config/api.js */ 23);var Location = function Location() {return __webpack_require__.e(/*! import() | pages/index/components/location */ "pages/index/components/location").then(__webpack_require__.bind(null, /*! ./components/location.vue */ 38));};var Search = function Search() {return __webpack_require__.e(/*! import() | pages/index/components/search */ "pages/index/components/search").then(__webpack_require__.bind(null, /*! ./components/search.vue */ 45));};var Title = function Title() {return __webpack_require__.e(/*! import() | pages/index/components/title */ "pages/index/components/title").then(__webpack_require__.bind(null, /*! ./components/title.vue */ 52));};var Recommend = function Recommend() {return __webpack_require__.e(/*! import() | pages/index/components/recommend */ "pages/index/components/recommend").then(__webpack_require__.bind(null, /*! ./components/recommend.vue */ 59));};var Lb = function Lb() {return __webpack_require__.e(/*! import() | pages/index/components/lb */ "pages/index/components/lb").then(__webpack_require__.bind(null, /*! ./components/lb.vue */ 66));};var NearByShop = function NearByShop() {return __webpack_require__.e(/*! import() | pages/index/components/nearByShop */ "pages/index/components/nearByShop").then(__webpack_require__.bind(null, /*! ./components/nearByShop.vue */ 73));};var ShopTopTit = function ShopTopTit() {return __webpack_require__.e(/*! import() | pages/index/components/shopTopTit */ "pages/index/components/shopTopTit").then(__webpack_require__.bind(null, /*! ./components/shopTopTit.vue */ 88));};var _default =
 {
   components: {
     Location: Location,
@@ -184,7 +187,7 @@ var _api = __webpack_require__(/*! ../../config/api.js */ 23);var Location = fun
     Title: Title,
     Recommend: Recommend,
     Lb: Lb,
-    NearByShop: NearByShop },
+    NearByShop: NearByShop, ShopTopTit: ShopTopTit },
 
   data: function data() {
     return {
@@ -193,26 +196,45 @@ var _api = __webpack_require__(/*! ../../config/api.js */ 23);var Location = fun
       location: '北京啊',
       searchVal: '麻辣烫',
       recommendArr: [], // 推荐的商品
-      nearByArr: [] // 附近商家的商品
-    };
+      nearByArr: [], // 附近商家的商品
+      shopTopTitDistanceTop: '',
+      isNeedTop: false };
+
   },
-  mounted: function mounted() {
+  mounted: function mounted() {var _this = this;
     this.getRecommendData();
     this.getNearByShopData();
+    var query = uni.createSelectorQuery().in(this);
+    query.select('#shopTopTit').boundingClientRect(function (data) {
+      console.log("节点离页面顶部的距离为" + data.top);
+      _this.shopTopTitDistanceTop = data.top;
+    }).exec();
+  },
+  // 距离顶部的距离
+  onPageScroll: function onPageScroll(res) {
+    console.log(res.scrollTop);
+    if (res.scrollTop >= this.shopTopTitDistanceTop) {
+      console.log('置顶');
+      this.isNeedTop = true;
+    } else {
+      console.log('不置顶');
+      this.isNeedTop = false;
+    }
   },
   methods: {
     // 为你优选
-    getRecommendData: function getRecommendData() {var _this = this;
+    getRecommendData: function getRecommendData() {var _this2 = this;
       (0, _request.request)(_api.recommendApi, '', 'get').then(function (res) {
-        _this.recommendArr = res;
+        _this2.recommendArr = res;
       });
     },
     // 附近商家
-    getNearByShopData: function getNearByShopData() {var _this2 = this;
+    getNearByShopData: function getNearByShopData() {var _this3 = this;
       (0, _request.request)(_api.nearbyShopApi, '', 'get').then(function (res) {
-        _this2.nearByArr = res;
+        _this3.nearByArr = res;
       });
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 21 */,
