@@ -2,13 +2,15 @@
 .content.data-v-2f4dff54{
     padding:20rpx
 }
-.shopTopTit.data-v-2f4dff54{
+.is_fixed.data-v-2f4dff54{
     width: 100%;
+    padding:20rpx;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
     position: fixed;
     left: 0;
     top: 0;
     right: 0;
     z-index: 5;
-    background-color: pink;
 }
 

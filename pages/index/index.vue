@@ -16,10 +16,11 @@
     
     <!-- 附近商家 -->
     <Title title="附近商家" bb="bbbbbbbbb" />
-    <view id="shopTopTit" :class="isNeedTop?'shopTopTit':''">
-      <ShopTopTit  />
-      <NearByShop :nearByArr="nearByArr" aa='5555' />
+    
+    <view id="shopTopFixed" :class="isNeedTop?'is_fixed':''" @click="toPullTop">
+      <ShopTopTit   />
     </view>
+    <NearByShop :nearByArr="nearByArr" aa='5555' />
     
 	</view>
 </template>
@@ -54,29 +55,38 @@
         recommendArr:[],   // 推荐的商品
         nearByArr:[],  // 附近商家的商品
         shopTopTitDistanceTop:'',
+        rectTop:'',
         isNeedTop:false
 			}
 		},
 		mounted(){
        this.getRecommendData() 
        this.getNearByShopData()
-       const query = uni.createSelectorQuery().in(this);
-       query.select('#shopTopTit').boundingClientRect(data => {
-         console.log("节点离页面顶部的距离为" + data.top);
-         this.shopTopTitDistanceTop = data.top
-       }).exec();
+    },
+    // 计算属性(时刻监听)
+    computed:{
+      // 监听筛选组件置顶和不置顶
+      monitorFn(){
+        if(this.rectTop > this.shopTopTitDistanceTop){
+          this.isNeedTop = true
+        }else{
+          this.isNeedTop = false
+        }
+      }
+    },
+    onLoad(){
+      // 监听元素距离顶部的距离
+      const query = uni.createSelectorQuery().in(this);
+      query.select('#shopTopFixed').boundingClientRect(data => {
+        console.log("节点离页面顶部的距离为" + data.top);
+        this.shopTopTitDistanceTop = data.top
+      }).exec();
     },
     // 距离顶部的距离
     onPageScroll(res) {
-        console.log(res.scrollTop)
-        if(res.scrollTop >= this.shopTopTitDistanceTop){
-          console.log('置顶')
-          this.isNeedTop = true
-        }else{
-          console.log('不置顶')
-          this.isNeedTop = false
-        }
+        this.rectTop = res.scrollTop
     },
+    
 		methods: {
       // 为你优选
       getRecommendData(){
@@ -89,6 +99,14 @@
         request(nearbyShopApi,'','get').then(res=>{
           this.nearByArr = res
         })
+      },
+      // 点击 综合排序、筛选那一栏的事件
+      toPullTop(){
+        console.log('单击到顶部')
+        uni.pageScrollTo({
+          scrollTop:this.shopTopTitDistanceTop,
+          duration:300  
+        })
       }
 		}
 	}
@@ -98,13 +116,15 @@
 	.content{
     padding:20rpx
   }
-  .shopTopTit{
+  .is_fixed{
     width: 100%;
+    padding:20rpx;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
     position: fixed;
     left: 0;
     top: 0;
     right: 0;
     z-index: 5;
-    background-color: pink;
   }
 </style>

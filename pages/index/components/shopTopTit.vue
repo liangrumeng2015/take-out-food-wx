@@ -1,36 +1,38 @@
 <template>
-  <view class="shop_top_tit">
-    <view class="nearBy_top">
-      <view @click="totalSortHandler()">
-       {{totalSortTxt}}<text>></text>
-      </view>
-      <view @click="otherHandler()">销量高</view>
-      <view @click="otherHandler()">速度快</view>
-      <view @click="otherHandler()">津贴联盟</view>
-      <view @click="selectSortHandler()">
-        筛选<text>></text>
-      </view>
-    </view>
-    <!-- 综合排序的 -->
-    <view class="total_sort" v-if="isShowTotalSort">
-      <view v-for="(item,idx) in totalSortData" :key="idx" :class="totalSortNum == idx? 'total_sort_active':''" @click="selectCurrentHandler(idx,item)">{{item}}</view>
-    </view>
-    <!-- 筛选的 -->
-    <view class="select_part" v-if="isShowSelectSort">
-      <view class="select_item_part" v-for="(item,idx) in selectData" :key="idx">
-        <view>{{item.selectTit}}</view>
-        <view class="select_item"> 
-          <view v-for="(innerItem,innerIdx) in item.data" :key="innerIdx">{{innerItem}}</view>
+  <view>
+    <view class="shop_top_tit">
+      <view class="nearBy_top">
+        <view @click="totalSortHandler()">
+         {{totalSortTxt}}<text>></text>
+        </view>
+        <view @click="otherHandler()">销量高</view>
+        <view @click="otherHandler()">速度快</view>
+        <view @click="otherHandler()">津贴联盟</view>
+        <view @click="selectSortHandler()">
+          筛选<text>></text>
         </view>
       </view>
-      <!-- 清除、完成按钮 -->
-      <view class="select_finish">
-        <view>清除</view>
-        <view>完成</view>
+      <!-- 综合排序的 -->
+      <view class="total_sort" v-if="isShowTotalSort">
+        <view v-for="(item,idx) in totalSortData" :key="idx" :class="totalSortNum == idx? 'total_sort_active':''" @click="selectCurrentHandler(idx,item)">{{item}}</view>
+      </view>
+      <!-- 筛选的 -->
+      <view class="select_part" v-if="isShowSelectSort">
+        <view class="select_item_part" v-for="(item,idx) in selectData" :key="idx">
+          <view>{{item.selectTit}}</view>
+          <view class="select_item"> 
+            <view v-for="(innerItem,innerIdx) in item.data" :key="innerIdx">{{innerItem}}</view>
+          </view>
+        </view>
+        <!-- 清除、完成按钮 -->
+        <view class="select_finish">
+          <view>清除</view>
+          <view>完成</view>
+        </view>
       </view>
     </view>
-    
-     
+    <!--  背景遮罩 -->
+    <view class="bg_black" v-if="isShowBg" @click="bgHandler"></view>
   </view>
 </template>
 
@@ -58,7 +60,8 @@
             selectTit:'人均价',
             data:['20元以下','20-40元','40元以上']
           }
-        ]
+        ],
+        isShowBg:false
       }
     },
     created(){
@@ -69,22 +72,41 @@
       totalSortHandler(){
         this.isShowTotalSort = !this.isShowTotalSort   // 综合排序
         this.isShowSelectSort = false
+        if(this.isShowTotalSort){
+            this.isShowBg = true
+        } else {
+          this.isShowBg = false
+        }
       },
       // 筛选
       selectSortHandler(){
         this.isShowSelectSort = !this.isShowSelectSort   // 筛选
         this.isShowTotalSort = false
+        this.isShowBg = true
+        if(this.isShowSelectSort){
+            this.isShowBg = true
+        } else {
+          this.isShowBg = false
+        }
       },
       // 销量高、速度快、津贴
       otherHandler(){
         this.isShowSelectSort = false
         this.isShowTotalSort = false
+        this.isShowBg = false
       },
       // 选中综合排序的内容
       selectCurrentHandler(idx,txt){
         this.totalSortNum = idx
         this.totalSortTxt = txt
         this.isShowTotalSort = false
+        this.isShowBg = false
+      },
+      // bg事件
+      bgHandler(){
+        this.isShowSelectSort = false
+        this.isShowTotalSort = false
+        this.isShowBg = false
       }
     }
   }
@@ -94,6 +116,8 @@
   .shop_top_tit{
     width: 100%;
     position: relative;
+    background-color: #FFFFFF;
+    z-index: 2;
   }
   .nearBy_top{
     width: 100%;
@@ -167,5 +191,14 @@
   }
   .total_sort_active{
     color:#f7da6a !important;
+  }
+  .bg_black{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 1;
   }
 </style>

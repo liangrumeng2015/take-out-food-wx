@@ -176,6 +176,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _constant = __webpack_require__(/*! ../../config/constant.js */ 21);
 
 var _request = __webpack_require__(/*! ../../config/request.js */ 22);
@@ -198,29 +199,38 @@ var _api = __webpack_require__(/*! ../../config/api.js */ 23);var Location = fun
       recommendArr: [], // 推荐的商品
       nearByArr: [], // 附近商家的商品
       shopTopTitDistanceTop: '',
+      rectTop: '',
       isNeedTop: false };
 
   },
-  mounted: function mounted() {var _this = this;
+  mounted: function mounted() {
     this.getRecommendData();
     this.getNearByShopData();
+  },
+  // 计算属性(时刻监听)
+  computed: {
+    // 监听筛选组件置顶和不置顶
+    monitorFn: function monitorFn() {
+      if (this.rectTop > this.shopTopTitDistanceTop) {
+        this.isNeedTop = true;
+      } else {
+        this.isNeedTop = false;
+      }
+    } },
+
+  onLoad: function onLoad() {var _this = this;
+    // 监听元素距离顶部的距离
     var query = uni.createSelectorQuery().in(this);
-    query.select('#shopTopTit').boundingClientRect(function (data) {
+    query.select('#shopTopFixed').boundingClientRect(function (data) {
       console.log("节点离页面顶部的距离为" + data.top);
       _this.shopTopTitDistanceTop = data.top;
     }).exec();
   },
   // 距离顶部的距离
   onPageScroll: function onPageScroll(res) {
-    console.log(res.scrollTop);
-    if (res.scrollTop >= this.shopTopTitDistanceTop) {
-      console.log('置顶');
-      this.isNeedTop = true;
-    } else {
-      console.log('不置顶');
-      this.isNeedTop = false;
-    }
+    this.rectTop = res.scrollTop;
   },
+
   methods: {
     // 为你优选
     getRecommendData: function getRecommendData() {var _this2 = this;
@@ -233,6 +243,14 @@ var _api = __webpack_require__(/*! ../../config/api.js */ 23);var Location = fun
       (0, _request.request)(_api.nearbyShopApi, '', 'get').then(function (res) {
         _this3.nearByArr = res;
       });
+    },
+    // 点击 综合排序、筛选那一栏的事件
+    toPullTop: function toPullTop() {
+      console.log('单击到顶部');
+      uni.pageScrollTo({
+        scrollTop: this.shopTopTitDistanceTop,
+        duration: 300 });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

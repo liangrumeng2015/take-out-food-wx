@@ -152,6 +152,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
+//
 var _default =
 {
   data: function data() {
@@ -174,9 +176,10 @@ var _default =
 
       {
         selectTit: '人均价',
-        data: ['20元以下', '20-40元', '40元以上'] }] };
+        data: ['20元以下', '20-40元', '40元以上'] }],
 
 
+      isShowBg: false };
 
   },
   created: function created() {
@@ -187,22 +190,41 @@ var _default =
     totalSortHandler: function totalSortHandler() {
       this.isShowTotalSort = !this.isShowTotalSort; // 综合排序
       this.isShowSelectSort = false;
+      if (this.isShowTotalSort) {
+        this.isShowBg = true;
+      } else {
+        this.isShowBg = false;
+      }
     },
     // 筛选
     selectSortHandler: function selectSortHandler() {
       this.isShowSelectSort = !this.isShowSelectSort; // 筛选
       this.isShowTotalSort = false;
+      this.isShowBg = true;
+      if (this.isShowSelectSort) {
+        this.isShowBg = true;
+      } else {
+        this.isShowBg = false;
+      }
     },
     // 销量高、速度快、津贴
     otherHandler: function otherHandler() {
       this.isShowSelectSort = false;
       this.isShowTotalSort = false;
+      this.isShowBg = false;
     },
     // 选中综合排序的内容
     selectCurrentHandler: function selectCurrentHandler(idx, txt) {
       this.totalSortNum = idx;
       this.totalSortTxt = txt;
       this.isShowTotalSort = false;
+      this.isShowBg = false;
+    },
+    // bg事件
+    bgHandler: function bgHandler() {
+      this.isShowSelectSort = false;
+      this.isShowTotalSort = false;
+      this.isShowBg = false;
     } } };exports.default = _default;
 
 /***/ }),

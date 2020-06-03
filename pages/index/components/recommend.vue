@@ -1,6 +1,6 @@
 <!-- 商品推荐，横向滑动 -->
 <template>
-   <view>
+   <view class="recommend_part">
        <scroll-view 
        class="scroll-view_H" 
        scroll-x="true" 
@@ -39,6 +39,10 @@
 </script>
 
 <style scoped>
+.recommend_part{
+  width: 100%;
+  height: 202rpx;
+}
 scroll-view ::-webkit-scrollbar {
   width: 0;
   height: 0;

@@ -2,6 +2,8 @@
 .shop_top_tit.data-v-41bcda3d{
   width: 100%;
   position: relative;
+  background-color: #FFFFFF;
+  z-index: 2;
 }
 .nearBy_top.data-v-41bcda3d{
   width: 100%;
@@ -84,5 +86,14 @@
 }
 .total_sort_active.data-v-41bcda3d{
   color:#f7da6a !important;
+}
+.bg_black.data-v-41bcda3d{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,.5);
+  z-index: 1;
 }
 
