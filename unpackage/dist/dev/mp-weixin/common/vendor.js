@@ -8812,14 +8812,17 @@ exports.request = request;var catchToast = function catchToast(title) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.searchApi = exports.nearbyShopApi = exports.recommendApi = void 0; // 为你优选  get
+Object.defineProperty(exports, "__esModule", { value: true });exports.searchApi = exports.selectMultiple = exports.nearbyShopApi = exports.recommendApi = void 0; // 为你优选  get
 var recommendApi = '/forshop/getprefer';
 
-// 附近商家
+// 附近商家  get
 exports.recommendApi = recommendApi;var nearbyShopApi = '/forshop/wxshop';
 
+// 筛选  post
+exports.nearbyShopApi = nearbyShopApi;var selectMultiple = '/forshop/multiple';
+
 // 搜索  post
-exports.nearbyShopApi = nearbyShopApi;var searchApi = '/forshop/search';exports.searchApi = searchApi;
+exports.selectMultiple = selectMultiple;var searchApi = '/forshop/search';exports.searchApi = searchApi;
 
 /***/ })
 ]]);

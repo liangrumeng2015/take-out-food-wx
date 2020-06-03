@@ -17,8 +17,8 @@
     <!-- 附近商家 -->
     <Title title="附近商家" bb="bbbbbbbbb" />
     
-    <view id="shopTopFixed" :class="isNeedTop?'is_fixed':''" @click="toPullTop">
-      <ShopTopTit   />
+    <view @click="toPullTop">
+      <ShopTopTit id="shopTopFixed" :class="isNeedTop?'is_fixed':''" />
     </view>
     <NearByShop :nearByArr="nearByArr" aa='5555' />
     
@@ -59,10 +59,6 @@
         isNeedTop:false
 			}
 		},
-		mounted(){
-       this.getRecommendData() 
-       this.getNearByShopData()
-    },
     // 计算属性(时刻监听)
     computed:{
       // 监听筛选组件置顶和不置顶
@@ -86,18 +82,20 @@
     onPageScroll(res) {
         this.rectTop = res.scrollTop
     },
-    
+    mounted(){
+       this.getIndexData() 
+    },
 		methods: {
+      // 批量并发请求 Promise.all  可以并发请求多个接口，并且同时得到多个接口的数据
       // 为你优选
-      getRecommendData(){
-        request(recommendApi,'','get').then(res=>{
-          this.recommendArr = res
+      getIndexData(){
+        Promise.all([request(recommendApi,'','get'),request(nearbyShopApi,'','get')])
+        .then(res=>{
+          this.recommendArr = res[0]   // 为你推荐
+          this.nearByArr = res[1]   // 附近商家列表
         })
-      },
-      // 附近商家
-      getNearByShopData(){
-        request(nearbyShopApi,'','get').then(res=>{
-          this.nearByArr = res
+        .catch(error=>{
+          console.log(error)
         })
       },
       // 点击 综合排序、筛选那一栏的事件

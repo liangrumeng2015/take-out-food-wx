@@ -29,7 +29,5 @@ const catchToast = function(title){
   })
 }
 
+export { request }
 
-export {
-  request
-}

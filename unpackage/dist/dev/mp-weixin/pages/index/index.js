@@ -203,10 +203,6 @@ var _api = __webpack_require__(/*! ../../config/api.js */ 23);var Location = fun
       isNeedTop: false };
 
   },
-  mounted: function mounted() {
-    this.getRecommendData();
-    this.getNearByShopData();
-  },
   // 计算属性(时刻监听)
   computed: {
     // 监听筛选组件置顶和不置顶
@@ -230,18 +226,20 @@ var _api = __webpack_require__(/*! ../../config/api.js */ 23);var Location = fun
   onPageScroll: function onPageScroll(res) {
     this.rectTop = res.scrollTop;
   },
-
+  mounted: function mounted() {
+    this.getIndexData();
+  },
   methods: {
+    // 批量并发请求 Promise.all  可以并发请求多个接口，并且同时得到多个接口的数据
     // 为你优选
-    getRecommendData: function getRecommendData() {var _this2 = this;
-      (0, _request.request)(_api.recommendApi, '', 'get').then(function (res) {
-        _this2.recommendArr = res;
-      });
-    },
-    // 附近商家
-    getNearByShopData: function getNearByShopData() {var _this3 = this;
-      (0, _request.request)(_api.nearbyShopApi, '', 'get').then(function (res) {
-        _this3.nearByArr = res;
+    getIndexData: function getIndexData() {var _this2 = this;
+      Promise.all([(0, _request.request)(_api.recommendApi, '', 'get'), (0, _request.request)(_api.nearbyShopApi, '', 'get')]).
+      then(function (res) {
+        _this2.recommendArr = res[0]; // 为你推荐
+        _this2.nearByArr = res[1]; // 附近商家列表
+      }).
+      catch(function (error) {
+        console.log(error);
       });
     },
     // 点击 综合排序、筛选那一栏的事件
