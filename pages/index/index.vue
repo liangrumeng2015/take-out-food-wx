@@ -34,9 +34,12 @@
   import NearByShop from './components/nearByShop.vue'
   import ShopTopTit from './components/shopTopTit.vue'
   import {lbData} from '../../config/constant.js'   // 轮播的数据
-  
+  // 数据请求
   import {request} from '../../config/request.js'
   import {recommendApi,nearbyShopApi,searchApi} from '../../config/api.js'
+  // 引入vuex的 mapstate
+  import {mapState} from 'vuex'
+  
 	export default {
     components:{
       Location,
@@ -61,6 +64,7 @@
 		},
     // 计算属性(时刻监听)
     computed:{
+      ...mapState(['screenArr']),
       // 监听筛选组件置顶和不置顶
       monitorFn(){
         if(this.rectTop > this.shopTopTitDistanceTop){
@@ -68,6 +72,10 @@
         }else{
           this.isNeedTop = false
         }
+      },
+      // 更新筛选的数据
+      screenData(){
+        this.nearByArr = this.screenArr
       }
     },
     onLoad(){
@@ -100,7 +108,6 @@
       },
       // 点击 综合排序、筛选那一栏的事件
       toPullTop(){
-        console.log('单击到顶部')
         uni.pageScrollTo({
           scrollTop:this.shopTopTitDistanceTop,
           duration:300  

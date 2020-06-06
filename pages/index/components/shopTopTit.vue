@@ -1,9 +1,10 @@
 <template>
+  <!-- 附近商家 -->
   <view>
     <view class="shop_top_tit">
       <view class="nearBy_top">
         <view @click="totalSortHandler()">
-         {{totalSortTxt}}<text>></text>
+         {{totalSortTxt}}<text></text>
         </view>
         <view @click="otherHandler()">销量高</view>
         <view @click="otherHandler()">速度快</view>
@@ -14,20 +15,28 @@
       </view>
       <!-- 综合排序的 -->
       <view class="total_sort" v-if="isShowTotalSort">
-        <view v-for="(item,idx) in totalSortData" :key="idx" :class="totalSortNum == idx? 'total_sort_active':''" @click="selectCurrentHandler(idx,item)">{{item}}</view>
+        <view v-for="(item,idx) in totalSortData" :key="idx" :class="totalSortNum == idx? 'total_sort_active':''" @click="selectCurrentHandler(idx,item)">{{item.name}}</view>
       </view>
       <!-- 筛选的 -->
       <view class="select_part" v-if="isShowSelectSort">
-        <view class="select_item_part" v-for="(item,idx) in selectData" :key="idx">
-          <view>{{item.selectTit}}</view>
+        <!-- 多选 -->
+        <view class="select_item_part" v-for="(item,idx) in screendata" :key="idx">
+          <view>{{item.title}}</view>
           <view class="select_item"> 
-            <view v-for="(innerItem,innerIdx) in item.data" :key="innerIdx">{{innerItem}}</view>
+            <view v-for="(innerItem,innerIdx) in item.datas" :key="innerIdx" @click="multipleSelectHandler(innerIdx,innerItem)" :class="innerItem.id == 2?'multiple_single_active':''">{{innerItem.name}}</view>
+          </view>
+        </view>
+        <!-- 单选 -->
+        <view class="select_item_part" v-for="(item,idx) in person" :key="idx">
+          <view>{{item.title}}</view>
+          <view class="select_item"> 
+            <view v-for="(innerItem,innerIdx) in item.datas" :key="innerIdx" :class="singleNum == innerIdx?'multiple_single_active':''" @click="singleSelect(innerIdx,innerItem)">{{innerItem.name}}</view>
           </view>
         </view>
         <!-- 清除、完成按钮 -->
         <view class="select_finish">
-          <view>清除</view>
-          <view>完成</view>
+          <view @click="clearHandler">清除</view>
+          <view @click="finishHandler">完成</view>
         </view>
       </view>
     </view>
@@ -37,6 +46,8 @@
 </template>
 
 <script>
+  import {request} from '../../../config/request.js'
+  import {startingAPi,selectMultiple} from '../../../config/api.js'
   export default{
     data(){
       return{
@@ -45,29 +56,128 @@
         totalSortTxt:'',
         isShowTotalSort:false,   // 综合排序 弹框
         isShowSelectSort:false,   // 筛选 弹框
-        totalSortData:[   // 综合排序里面的数据
-          '综合排序',
-          '时间最低1',
-          '销量最高1',
-          '销量最高2'
+        totalSortData: [  // 综合排序里面的数据
+        	{
+        		"name":"综合排序",
+        		"screen":"_id",
+        		"nums":1
+        	},
+        	{
+        		"name":"起送价最低",
+        		"screen":"delivering",
+        		"nums":1
+        	},
+        	{
+        		"name":"配送费最低",
+        		"screen":"physical",
+        		"nums":1
+        	},
+        	{
+        		"name":"人均高到低",
+        		"screen":"capita",
+        		"nums":-1
+        	},
+        	{
+        		"name":"人均低到高",
+        		"screen":"capita",
+        		"nums":1
+        	}
         ],
-        selectData:[   // 筛选条件数据（按理说应该后端返回）
-          {
-            selectTit:'商家特色（可多选）',
-            data:['配送最快','0元起送','免配送费']
-          },
-          {
-            selectTit:'人均价',
-            data:['20元以下','20-40元','40元以上']
-          }
+        screendata:[   // 多选
+        	{
+        		"title":"商家特色(可多选)",
+        		"datas":[
+        			{
+        				"id":1,
+        				"sign":'duration',
+        				"name":'配送最快'
+        			},
+        			{
+        				"id":1,
+        				"sign":'deliver',
+        				"name":'0元起送'
+        			},
+        			{
+        				"id":1,
+        				"sign":'physi',
+        				"name":'免配送费'
+        			}
+        		],
+        	}		
         ],
-        isShowBg:false
+        person:[   // 人均价筛选
+        	{
+        		"title":"人均价",
+        		"datas":[
+        			{
+        			"name":"20元以下",
+        			"per":{
+        				"$lte":20
+        				},
+        			},
+        			{
+        			"name":"20-40元",
+        			"per":{
+        				"$lte":40,
+        				"$gte":20
+        				},
+        			},
+        			{
+        			"name":"40元以上",
+        			"per":{
+        				"$gt":40
+        				},
+        			},
+        		]
+        	}
+        ],
+        isShowBg:false,
+        multipleSelectData:{}, 
+        singleNum: -1
       }
     },
     created(){
-      this.totalSortTxt = this.totalSortData[0]
+      this.totalSortTxt = this.totalSortData[0].name
     },
     methods:{
+      // 多选
+      multipleSelectHandler(idx,item){
+        if(item.id == 2){   // 选中
+          item.id = 1
+          this.$delete(this.multipleSelectData,item.sign,item.sign)
+        }else if(item.id == 1){   // 未选中
+          item.id = 2
+          this.$set(this.multipleSelectData,item.sign,item.sign)
+        }
+      },
+      // 单选
+      singleSelect(idx,item){
+        this.singleNum = idx
+        if(this.singleNum == idx){
+          this.$set(this.multipleSelectData,'capita',item.per)
+        }
+      },
+      // 清除按钮
+      clearHandler(){
+        // 多选清空
+        this.screendata[0].datas.forEach(item=> item.id = 1)
+        // 单选清空
+        this.singleNum = -1  
+        this.multipleSelectData = {}
+        this.bgHandler()
+      },
+      
+      // 筛选确定按钮
+      finishHandler(){
+          console.log(this.multipleSelectData)
+          this.bgHandler()
+          if(Object.keys(this.multipleSelectData).length){
+            request(selectMultiple,this.multipleSelectData,'post').then(res=>{
+              this.$store.commit('screenStoreFn',res)
+            })
+          }
+      },
+      
       // 综合排序
       totalSortHandler(){
         this.isShowTotalSort = !this.isShowTotalSort   // 综合排序
@@ -78,6 +188,27 @@
           this.isShowBg = false
         }
       },
+      
+      // 选中综合排序的内容
+      selectCurrentHandler(idx,item){
+        this.totalSortNum = idx
+        this.totalSortTxt = item.name
+        this.isShowTotalSort = false
+        this.isShowBg = false
+        this.sortHandler(item)
+      },
+      
+      // 异步获取数据
+      sortHandler(item){
+        let data ={
+          screen: item.screen,
+          nums: item.nums
+        }
+        request(startingAPi,data,'post').then(res=>{
+          this.$store.commit('screenStoreFn',res)
+        })
+      },
+      
       // 筛选
       selectSortHandler(){
         this.isShowSelectSort = !this.isShowSelectSort   // 筛选
@@ -89,19 +220,14 @@
           this.isShowBg = false
         }
       },
+      
       // 销量高、速度快、津贴
       otherHandler(){
         this.isShowSelectSort = false
         this.isShowTotalSort = false
         this.isShowBg = false
       },
-      // 选中综合排序的内容
-      selectCurrentHandler(idx,txt){
-        this.totalSortNum = idx
-        this.totalSortTxt = txt
-        this.isShowTotalSort = false
-        this.isShowBg = false
-      },
+      
       // bg事件
       bgHandler(){
         this.isShowSelectSort = false
@@ -169,7 +295,7 @@
     border-radius: 10rpx;
     margin:20rpx;
     text-align: center;
-    background-color: pink;
+    background-color: #fcfbfd;
   }
   .select_finish{
     width:100%;
@@ -200,5 +326,9 @@
     bottom: 0;
     background-color: rgba(0,0,0,.5);
     z-index: 1;
+  }
+  .multiple_single_active{
+    background-color:#fefae7!important ;
+    color: #f3ca78!important;
   }
 </style>

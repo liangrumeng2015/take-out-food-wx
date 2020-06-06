@@ -62,7 +62,7 @@
   border-radius: 10rpx;
   margin:20rpx;
   text-align: center;
-  background-color: pink;
+  background-color: #fcfbfd;
 }
 .select_finish.data-v-41bcda3d{
   width:100%;
@@ -95,5 +95,9 @@
   bottom: 0;
   background-color: rgba(0,0,0,.5);
   z-index: 1;
+}
+.multiple_single_active.data-v-41bcda3d{
+  background-color:#fefae7!important ;
+  color: #f3ca78!important;
 }
 

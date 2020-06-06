@@ -1,4 +1,5 @@
 <template>
+  <!-- 附近商家 商品模块 -->
     <view class="nearbyshop">
       <view class="shop_view" v-for="(item,idx) in nearByArr" :key="idx">
         <view class="shop_left_logo">
