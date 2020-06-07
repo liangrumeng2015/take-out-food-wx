@@ -1,4 +1,5 @@
-export const lbData = [
+// 首页轮播图icon
+const lbData = [
   [
     {
       'img':'../../../static/inster/meishi.png',
@@ -84,3 +85,7 @@ export const lbData = [
     }
   ]
 ]
+
+export {
+  lbData 
+}

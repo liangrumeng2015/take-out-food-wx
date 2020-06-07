@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "搜索",
+  "usingComponents": {
+    "near-by-shop": "/pages/index/components/nearByShop"
+  }
+}

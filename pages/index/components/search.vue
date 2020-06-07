@@ -16,7 +16,9 @@
     },
     methods:{
         searchHandler(){
-          console.log('搜索事件')
+          uni.navigateTo({
+            url:'/pages/search/search'
+          })
         }
     }
   }
